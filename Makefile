@@ -1,6 +1,7 @@
 # This makefile is downloading an archive found in 
 # the 'archive' file already existing in this directory
 # and validating the md5sum of the archive against it.
+NAME := bzip2
 
 define find-common-dir
 for d in common ../common ../../common ; do if [ -f $$d/Makefile.common ] ; then echo "$$d"; break ; fi ; done
