@@ -14,6 +14,7 @@ SOURCEFILES := $(shell cat archive 2>/dev/null | awk '{ print $$2 }')
 sources: $(SOURCEFILES)
 
 $(SOURCEFILES):
+	echo "specfile $(SPECFILE)"
 	$(CLIENT) $(LOOKASIDE_URI)/$(NAME)/$(SOURCEFILES)
 	md5sum -c archive || ( echo 'MD5 check failed' && rm $(SOURCEFILES); exit 1 )
 
