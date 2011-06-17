@@ -1,6 +1,6 @@
-# This makefile is downloading an archive found in 
-# the 'archive' file already existing in this directory
-# and validating the md5sum of the archive against it.
+# This makefile is downloading any file found in 
+# the 'sources' file already existing in this directory
+# and validating the sha256sum of the archive against it.
 NAME := bzip2
 
 define find-common-dir
@@ -16,7 +16,7 @@ sources: $(SOURCEFILES)
 
 $(SOURCEFILES):
 	$(CLIENT) $(LOOKASIDE_URI)/$(NAME)/$(SOURCEFILES)
-	md5sum -c sources || ( echo 'MD5 check failed' && rm $(SOURCEFILES); exit 1 )
+	sha256sum -c sources || ( echo 'SHA256 check failed' && rm $(SOURCEFILES); exit 1 )
 
 clean:
 	rm $(SOURCEFILES)
