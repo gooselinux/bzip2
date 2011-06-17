@@ -10,14 +10,13 @@ COMMON_DIR := $(shell $(find-common-dir))
 
 include $(COMMON_DIR)/Makefile.common
 
-SOURCEFILES := $(shell cat archive 2>/dev/null | awk '{ print $$2 }')
+SOURCEFILES := $(shell cat sources 2>/dev/null | awk '{ print $$2 }')
 
 sources: $(SOURCEFILES)
 
 $(SOURCEFILES):
-	echo "specfile $(SPECFILE)"
 	$(CLIENT) $(LOOKASIDE_URI)/$(NAME)/$(SOURCEFILES)
-	md5sum -c archive || ( echo 'MD5 check failed' && rm $(SOURCEFILES); exit 1 )
+	md5sum -c sources || ( echo 'MD5 check failed' && rm $(SOURCEFILES); exit 1 )
 
 clean:
-	rm goose-release-6.tar.gz
+	rm $(SOURCEFILES)
