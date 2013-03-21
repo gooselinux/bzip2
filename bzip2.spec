@@ -2,7 +2,7 @@
 Summary: A file compression utility
 Name: bzip2
 Version: 1.0.5
-Release: 6.1%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 URL: http://www.bzip.org/
@@ -10,6 +10,7 @@ Source: http://www.bzip.org/%{version}/bzip2-%{version}.tar.gz
 Patch0: bzip2-1.0.4-saneso.patch
 Patch5: bzip2-1.0.4-cflags.patch
 Patch6: bzip2-1.0.4-bzip2recover.patch
+Patch7: bzip2-1.0.2-ow.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -46,6 +47,7 @@ Libraries for applications using the bzip2 compression format.
 %patch0 -p1 -b .saneso
 %patch5 -p1 -b .cflags
 %patch6 -p1 -b .bz2recover
+%patch7 -p1 -b .ow
 
 %build
 
@@ -105,6 +107,11 @@ rm -rf ${RPM_BUILD_ROOT}
 /%{_libdir}/*so
 
 %changelog
+* Mon Sep 13 2010 Ivana Hutarova Varekova <varekova@redhat.com> 1.0.5-7
+- Resolves: #632268
+  integer overflow flaw in BZ2_decompress - CVE-2010-0405
+  (upstream patch)
+
 * Mon Nov 30 2009 Dennis Gregorovic <dgregor@redhat.com> - 1.0.5-6.1
 - Rebuilt for RHEL 6
 
